@@ -9,8 +9,6 @@ export class StockSearchPipe implements PipeTransform {
     constructor(private configService: ConfigService) { }
 
     transform(value: any, metadata: ArgumentMetadata) {
-        console.log('value', value)
-
         let error = false;
         let errorsResponse = {
             start_time: [],
