@@ -5,14 +5,12 @@ import { StocksSearchDto } from './dto/StocksSearchDto';
 
 import Piscina from 'piscina';
 import { resolve } from 'path';
-import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class StocksService {
 
     private pool: Piscina;
     constructor(private dataService: DatageneratorService
     ) {
-
         this.pool = new Piscina({
             filename: resolve(__dirname, 'workers/index.js'),
         });
