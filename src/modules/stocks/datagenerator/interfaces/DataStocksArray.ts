@@ -1,5 +1,5 @@
-import { DataStocksPoint } from "./DataStocksPoint";
+import { DataStocksPoint } from './DataStocksPoint';
 
 export interface DataStocksArray {
-    items: DataStocksPoint[];
+  items: DataStocksPoint[];
 }

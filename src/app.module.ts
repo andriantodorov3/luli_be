@@ -6,4 +6,4 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [StocksModule, ConfigModule.forRoot({ isGlobal: true })],
 })
-export class AppModule { }
+export class AppModule {}
