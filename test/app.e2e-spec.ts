@@ -72,7 +72,7 @@ describe('AppController (e2e)', () => {
     const response = await request(httpServer)
       .post('/api/v1/stocks/search')
       .send(payload);
-    //console.log('response', response)
+    console.log('response', response)
     expect(response.status).toBe(400);
   });
 
