@@ -12,13 +12,13 @@ const result = <SearchResult>{
   buy_point: 123,
   buy_point_price: 10,
   sell_point: 133,
-  sell_point_price: 100
+  sell_point_price: 100,
 };
 
-const dto = <StocksSearchDto> {
+const dto = <StocksSearchDto>{
   start_time: 100,
-  end_time: 200
-}
+  end_time: 200,
+};
 
 describe('StocksController', () => {
   let controller: StocksController;
@@ -26,19 +26,21 @@ describe('StocksController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [StocksController],
-      providers:[ ]
+      providers: [],
     })
-    .useMocker((token) => {
-      if (token === StocksService) {
-        return { searchStocks: jest.fn().mockResolvedValue(result) };
-      }
-      if (typeof token === 'function') {
-        const mockMetadata = moduleMocker.getMetadata(token) as MockFunctionMetadata<any, any>;
-        const Mock = moduleMocker.generateFromMetadata(mockMetadata);
-        return new Mock();
-      }
-    }).
-    compile();
+      .useMocker((token) => {
+        if (token === StocksService) {
+          return { searchStocks: jest.fn().mockResolvedValue(result) };
+        }
+        if (typeof token === 'function') {
+          const mockMetadata = moduleMocker.getMetadata(
+            token,
+          ) as MockFunctionMetadata<any, any>;
+          const Mock = moduleMocker.generateFromMetadata(mockMetadata);
+          return new Mock();
+        }
+      })
+      .compile();
 
     controller = module.get<StocksController>(StocksController);
   });
@@ -47,11 +49,9 @@ describe('StocksController', () => {
     expect(controller).toBeDefined();
   });
 
-
   describe('searchStocks', () => {
     it('should return data', async () => {
       expect(await controller.searchStocks(dto)).toBe(result);
     });
   });
-
 });

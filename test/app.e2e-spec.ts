@@ -17,8 +17,6 @@ describe('AppController (e2e)', () => {
 
   //nothing configured besides the search url, expect not found here
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(404)
+    return request(app.getHttpServer()).get('/').expect(404);
   });
 });

@@ -1,4 +1,4 @@
 export interface DataStocksPoint {
-    value: number;
-    tstamp: number;
+  value: number;
+  tstamp: number;
 }
