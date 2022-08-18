@@ -28,7 +28,7 @@ export class StockSearchPipe implements PipeTransform {
     if (value.end_time > configEndTime) {
       error = true;
       errorsResponse.end_time.push(
-        `Start time cannot be past ${new Date(
+        `End time cannot be past ${new Date(
           <number>configEndTime * 1000,
         ).toISOString()}`,
       );
@@ -43,7 +43,7 @@ export class StockSearchPipe implements PipeTransform {
 
     if (value.start_time > value.end_time) {
       error = true;
-      errorsResponse.start_time.push(`Start time cannot be past end time `);
+      errorsResponse.start_time.push(`Start time cannot be past end time`);
     }
 
     if (error) {
