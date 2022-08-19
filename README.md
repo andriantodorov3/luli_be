@@ -56,6 +56,10 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+OR use docker instead
+<code>docker build -t lulibe .</code>
+<code>docker run -p4444:3333  --env-file=.env  lulibe</code>
 ## Test
 
 ```bash
