@@ -5,7 +5,10 @@ import { AppModule } from './../src/app.module';
 import { StocksModule } from './../src/modules/stocks/stocks.module';
 
 import { ValidationError, ValidationPipe } from '@nestjs/common';
-import { ValidationFilter, ValidationException } from './../src/core/validation/validation.filter';
+import {
+  ValidationFilter,
+  ValidationException,
+} from './../src/core/validation/validation.filter';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -31,11 +34,11 @@ describe('AppController (e2e)', () => {
         skipMissingProperties: false,
         exceptionFactory: (errors: ValidationError[]) => {
           const errMsg = {};
-          errors.forEach(err => {
+          errors.forEach((err) => {
             errMsg[err.property] = [...Object.values(err.constraints)];
           });
           return new ValidationException(errMsg);
-        }
+        },
       }),
     );
 
@@ -43,32 +46,27 @@ describe('AppController (e2e)', () => {
     httpServer = app.getHttpServer();
   });
 
-
   //nothing configured besides the search url, expect not found here
   it('Get homepage not found', () => {
-    return request(httpServer)
-      .get('/')
-      .expect(404)
+    return request(httpServer).get('/').expect(404);
   });
 
   it('Search with correct params', async () => {
     const payload = {
       start_time: 1659940140,
       end_time: 1659940300,
-    }
+    };
     const response = await request(httpServer)
       .post('/api/v1/stocks/search')
       .send(payload);
     expect(response.status).toBe(200);
-
   });
 
   it('Search with incorrect params', async () => {
-
     const payload = {
       end_time: 1659940140,
       start_time: 1659940300,
-    }
+    };
     const response = await request(httpServer)
       .post('/api/v1/stocks/search')
       .send(payload);
