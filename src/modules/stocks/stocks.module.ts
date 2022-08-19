@@ -7,4 +7,4 @@ import { DatageneratorService } from './datagenerator/datagenerator.service';
   providers: [StocksService, DatageneratorService],
   controllers: [StocksController],
 })
-export class StocksModule { }
+export class StocksModule {}

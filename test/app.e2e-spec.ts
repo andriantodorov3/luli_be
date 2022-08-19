@@ -43,6 +43,7 @@ describe('AppController (e2e)', () => {
     httpServer = app.getHttpServer();
   });
 
+
   //nothing configured besides the search url, expect not found here
   it('Get homepage not found', () => {
     return request(httpServer)
@@ -50,7 +51,7 @@ describe('AppController (e2e)', () => {
       .expect(404)
   });
 
-  it('Search with correct params', async (done) => {
+  it('Search with correct params', async () => {
     const payload = {
       start_time: 1659940140,
       end_time: 1659940300,
@@ -60,10 +61,9 @@ describe('AppController (e2e)', () => {
       .send(payload);
     expect(response.status).toBe(200);
 
-    return true;
   });
 
-  it('Search with incorrect params', async (done) => {
+  it('Search with incorrect params', async () => {
 
     const payload = {
       end_time: 1659940140,
@@ -72,7 +72,6 @@ describe('AppController (e2e)', () => {
     const response = await request(httpServer)
       .post('/api/v1/stocks/search')
       .send(payload);
-    console.log('response', response)
     expect(response.status).toBe(400);
   });
 

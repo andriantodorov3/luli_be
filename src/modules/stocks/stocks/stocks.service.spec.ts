@@ -14,20 +14,19 @@ describe('StocksService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [StocksService,
-        DatageneratorService
+      providers: [StocksService, DatageneratorService],
+      imports: [
+        ConfigModule.forRoot({
+          ignoreEnvVars: true,
+          ignoreEnvFile: true,
+          load: [() => ({ START_TIME: START, END_TIME: END })],
+        }),
       ],
-      imports: [ConfigModule.forRoot({
-        ignoreEnvVars: true,
-        ignoreEnvFile: true,
-        load: [() => ({ START_TIME: START, END_TIME: END })],
-      })
-      ]
     }).compile();
 
     service = module.get<StocksService>(StocksService);
-    datageneratorService = module.get<DatageneratorService>(DatageneratorService);
-
+    datageneratorService =
+      module.get<DatageneratorService>(DatageneratorService);
   });
 
   it('should be defined', () => {
@@ -36,19 +35,19 @@ describe('StocksService', () => {
 
   it('testing', () => {
     const result = <DataStocksArray>{
-      items: [<DataStocksPoint>{
-        tstamp: 123,
-        value: 234
-      },
-      <DataStocksPoint>{
-        tstamp: 124,
-        value: 5
-      },
-      ]
-
+      items: [
+        <DataStocksPoint>{
+          tstamp: 123,
+          value: 234,
+        },
+        <DataStocksPoint>{
+          tstamp: 124,
+          value: 5,
+        },
+      ],
     };
-    jest.spyOn(datageneratorService, 'generateData').mockImplementation(() => result);
-
-
+    jest
+      .spyOn(datageneratorService, 'generateData')
+      .mockImplementation(() => result);
   });
 });
