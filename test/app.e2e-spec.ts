@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { StocksModule } from './../src/modules/stocks/stocks.module';
 
 import { ValidationError, ValidationPipe } from '@nestjs/common';
 import {
@@ -19,7 +18,7 @@ describe('AppController (e2e)', () => {
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, StocksModule],
+      imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
